@@ -1,5 +1,5 @@
 {
-  "name": "pro-web-models",
+  "name": "pro-web-core",
   "version": "1.0.0",
   "description": "models for ubc domain",
   "main": "dist/js/index.js",

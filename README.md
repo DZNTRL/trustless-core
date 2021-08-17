@@ -9,6 +9,12 @@ Repo containing all back-end logic and data access for my professional website. 
 4. yarn
 5. npx
 
+### Contents
+`src`
+contains all the typescript source code
+`data-model`
+contains the MySQL Workbench data model
+
 ### Setup
 
 Assuming all of the above requirements are met, the following commands are needed to create a working build. After a working build is established, the core can be referenced in other projects.
