@@ -12,9 +12,12 @@ const sqlCreateUser = `
     SELECT LAST_INSERT_ID();
 `
 const sqlCheckUsernameUnique = `
-    SELECT COUNT(*)
-    FROM Accounts
-    WHERE username = ?
+    SELECT 
+        COUNT(username) as result
+    FROM
+        Accounts
+    WHERE
+        username = ?
 `
 export class User implements IUser {
     pool: Pool    
@@ -23,28 +26,17 @@ export class User implements IUser {
         this.checkUsernameUnique.bind(this)
     }
     async checkUsernameUnique(username) {
-        console.log('pool', this.pool)
         return new Promise<Response<boolean>>((res, rej) => {
-            console.log("check username unique")
             const resp = new Response<boolean>()
             this.pool.query(sqlCheckUsernameUnique, [username], (err, result) => {
-                console.log(err, result)
                 if(err) {
                     resp.IsError = true
                     //@ts-ignore
                     resp.Message = err
                     return rej(resp)
                 }
-                //@ts-ignore
-                if(result.affectRows === 0)  {
-                    resp.IsError = true
-                    resp.Message = PrivateResponseMessages.NoRecordsUpdated
-                    rej(resp)
-                } else {
-                    //@ts-ignore
-                    resp.Data = result
-                    res(resp)
-                }
+                resp.Data = result.result === 0
+                res(resp)
             })
         });
     }
