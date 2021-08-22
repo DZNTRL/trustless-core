@@ -3,7 +3,9 @@ import mysql from "mysql2"
 import openpgp from "openpgp"
 import { IUser } from "../interfaces/sql/IUser"
 import { Response } from "../models/Response"
-import { PrivateResponseMessages } from "../interfaces/constants/Enums"
+import { ResponseMessages } from "../interfaces/constants/Enums"
+import { QueryParameter } from "../interfaces/constants/Types"
+import { IResponse } from "../interfaces/IResponse"
 const sqlCreateUser = `
     INSERT INTO Accounts
     (username, publicKey)
@@ -25,6 +27,9 @@ export class User implements IUser {
         this.pool = pool
         this.checkUsernameUnique.bind(this)
     }
+    private async query(statement: string, params: Array<any>, onResolve, onReject) {
+
+    }
     async checkUsernameUnique(username) {
         return new Promise<Response<boolean>>((res, rej) => {
             const resp = new Response<boolean>()
@@ -44,7 +49,9 @@ export class User implements IUser {
         return Promise.resolve(false)
     }
     async createUser(username: string, publicKey: string) {
-        return Promise.resolve(0)
+        return new Promise<IResponse<number>>(() => {
+
+        })
     }
     async createChallenge(user) {
         return Promise.resolve("test")
