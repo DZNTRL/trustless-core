@@ -7,6 +7,8 @@ export interface IEnums {
     ETags: typeof ETags
 }
 
-export enum PrivateResponseMessages {
-    NoRecordsUpdated = "No Records Updated"
+export enum ResponseMessages {
+    OK = 0,
+    NoRecordsUpdated = 1,
+    NotFound = 2
 }

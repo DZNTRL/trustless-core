@@ -1,11 +1,12 @@
 import { IResponse } from "../interfaces/IResponse"
-export class Response<T> implements IResponse<T> {
-    Message: string = ""
+import { ResponseMessages } from "../interfaces/constants/Enums"
+export class Response<T> implements IResponse<T> {    
+    Message: string = ResponseMessages.OK.toString()
     Data: T | null = null
     IsError: boolean = false
     constructor(Data: T = null, Message: string = "", IsError: boolean = false) {
         this.Data = Data    
-        this.Message = Message
+        this.Message = Message ? Message : this.Message
         this.IsError = IsError
     }   
 }
