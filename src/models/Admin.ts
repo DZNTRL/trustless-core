@@ -1,4 +1,4 @@
-import { MarkupTypes } from "../interfaces/constants/MarkupTypes"
+import { MarkupTypes } from "../enums/MarkupTypes"
 export class Admin {
     id: number = 0
     title: string = ""

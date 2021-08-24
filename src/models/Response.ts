@@ -1,5 +1,6 @@
 import { IResponse } from "../interfaces/IResponse"
-import { ResponseMessages } from "../interfaces/constants/Enums"
+import { ResponseMessages } from "../enums/ResponseMessages"
+
 export class Response<T> implements IResponse<T> {    
     Message: string = ResponseMessages.OK.toString()
     Data: T | null = null

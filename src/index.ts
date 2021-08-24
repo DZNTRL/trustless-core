@@ -1,23 +1,43 @@
-import { User } from "./sql/User";
-import { SQLUtils } from "./sql/Utils"
-import { IResponse } from "./interfaces/IResponse";
-import { Response } from "./models/Response";
-import { ResponseMessages } from "./interfaces/constants/Enums";
+import { IResponse } from "./interfaces/IResponse"
+import { Response } from "./models/Response"
+import { Enums, IEnums } from "./enums"
+import { ProWebRepo, IProWebRepo } from "./repo/"
+import { IProWebService, ProWebService } from "./services"
+import { IProWebModels, ProWebModels } from "./models"
+import { ProWebTypes } from "./types"
+import { IProWebConstants } from "./interfaces/constants"
+import { ProWebConstants } from "./constants"
 
-export interface IProWebModels {
-    User: typeof User
-    Utils: typeof SQLUtils
+export interface IProWebCore {
+    Repo: IProWebRepo 
     Response: typeof Response
-    ResponseMessages: typeof ResponseMessages
+    Service: IProWebService
+    Enums: IEnums
+    Models: IProWebModels
+    Constants: IProWebConstants
 }
 
-const ProWebModels: IProWebModels = {
-    User: User,
-    Utils: SQLUtils,
+const ProWebCore: IProWebCore = {
+    Repo: ProWebRepo,
+    Service: ProWebService,
     Response,
-    ResponseMessages
+    Enums,
+    Models: ProWebModels,
+    Constants: ProWebConstants
 }
+
+export { ProWebTypes }
 
 export { IResponse }
 
-export default ProWebModels
+export { ProWebService}
+
+export { ProWebRepo }
+
+export { ProWebModels }
+
+export { ProWebConstants }
+
+export { Enums as ProWebEnums }
+
+export default ProWebCore
