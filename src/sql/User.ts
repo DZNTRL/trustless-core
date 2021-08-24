@@ -47,9 +47,6 @@ export class User implements IUser {
                 .catch(result => result)
         })
     }
-    async login(user, challengeResponse) {
-        return Promise.resolve(false)
-    }
     async createUser(username: string, publicKey: string) {
         return new Promise<Response<number>>((res, rej) => {
             this.query<any>(sqlCreateUser, [username, publicKey])
@@ -70,7 +67,7 @@ export class User implements IUser {
                     if(result.Data[0][0]) {
                         res(new Response(result.Data[0][0].publicKey))
                     } else {
-                        rej(new Response(null, ResponseMessages.NotFound.toString()))
+                        res(new Response(null, ResponseMessages.NotFound.toString(), true))
                     }
                 })
                 .catch(result => result)
