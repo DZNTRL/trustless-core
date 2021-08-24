@@ -1,7 +1,7 @@
 import { Response } from "../models/Response";
-import { ISQLUtils } from "../interfaces/sql/IUtils";
+import { ISQLUtils } from "../interfaces/repo/IUtils";
 
-export const SQLUtils: ISQLUtils = {
+export const Utils: ISQLUtils = {
     query: function<T>(pool, statement, params) {
         const resp = new Response<T>()
         return new Promise((resolve, reject) => {

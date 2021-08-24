@@ -1,6 +1,6 @@
 import mysql from "mysql2/promise"
 import { IResponse } from "../IResponse"
-import { QueryParameter } from "../constants/Types"
+import { QueryParameter } from "../../types"
 export interface ISQLUtils {
     query: <T>(
         pool: mysql.Pool,

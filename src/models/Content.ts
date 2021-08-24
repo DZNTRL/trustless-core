@@ -1,4 +1,4 @@
-import { MarkupTypes } from "../interfaces/constants/MarkupTypes"
+import { MarkupTypes } from "../enums/MarkupTypes"
 
 export class Content {
     id: number = 0

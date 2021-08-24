@@ -1,11 +1,9 @@
 import { Pool } from "mysql2/promise"
-import openpgp from "openpgp"
-import { IUser } from "../interfaces/sql/IUser"
+import { IUser } from "../interfaces/repo/IUser"
 import { Response } from "../models/Response"
-import { ResponseMessages } from "../interfaces/constants/Enums"
-import { QueryParameter } from "../interfaces/constants/Types"
-import { IResponse } from "../interfaces/IResponse"
-import { SQLUtils } from "./Utils"
+import { ResponseMessages } from "../enums/ResponseMessages"
+import { QueryParameter } from "../types/"
+import { Utils } from "./Utils"
 
 const sqlCreateUser = `
     INSERT INTO Accounts
@@ -36,7 +34,7 @@ export class User implements IUser {
         this.checkUsernameUnique.bind(this)
     }
     private async query<T>(statement: string, params: Array<QueryParameter>) {
-        return SQLUtils.query<T>(this.pool, statement, params)
+        return Utils.query<T>(this.pool, statement, params)
     }
     async checkUsernameUnique(username: string) {
         return new Promise<Response<boolean>>((res, rej) => { 

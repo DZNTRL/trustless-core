@@ -1,3 +1,5 @@
-import Enums from "./Enums"
+import { IProWebConstants } from "../interfaces/constants";
 
-export { Enums }
+export const ProWebConstants: IProWebConstants = {
+
+}
