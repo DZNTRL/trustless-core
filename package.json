@@ -1,7 +1,7 @@
 {
   "name": "pro-web-core",
   "version": "1.0.0",
-  "description": "models for ubc domain",
+  "description": "",
   "main": "dist/js/index.js",
   "scripts": {
     "build": "npx tsc --skipLibCheck && node ./changeUpdate",
@@ -13,16 +13,14 @@
   },
   "author": "josh bowling",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/unitedbycharity-1/ubc-models#readme",
   "dependencies": {
-    "@types/mysql": "^2.15.19",
     "async": "^3.2.1",
-    "bluebird": "^3.7.2",
     "config": "^3.3.6",
     "mysql2": "^2.3.0",
     "openpgp": "^5.0.0-5"
   },
   "devDependencies": {
+    "@types/mysql": "^2.15.19",
     "chai": "^4.3.4",
     "mocha": "^9.0.3"
   }
