@@ -7,6 +7,9 @@ import { IProWebModels, ProWebModels } from "./models"
 import { ProWebTypes } from "./types"
 import { IProWebConstants } from "./interfaces/constants"
 import { ProWebConstants } from "./constants"
+import { Utils } from "./utils"
+import { IUtils } from "./interfaces/utils"
+
 
 export interface IProWebCore {
     Repo: IProWebRepo 
@@ -15,6 +18,7 @@ export interface IProWebCore {
     Enums: IEnums
     Models: IProWebModels
     Constants: IProWebConstants
+    Utils: IUtils
 }
 
 const ProWebCore: IProWebCore = {
@@ -23,12 +27,15 @@ const ProWebCore: IProWebCore = {
     Response,
     Enums,
     Models: ProWebModels,
-    Constants: ProWebConstants
+    Constants: ProWebConstants,
+    Utils
 }
 
 export { ProWebTypes }
 
 export { IResponse }
+
+export { IUtils }
 
 export { ProWebService}
 
