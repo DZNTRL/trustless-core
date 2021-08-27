@@ -122,12 +122,24 @@ export class User implements IUser {
         })
     }
     async getChallenge(username) {
+        const resp = new Response<string>()
         return new Promise<Response<string>>((res, rej) => { 
             this.query<any>(sqlGetChallenge, [username])
                 .then(result => {
-                    res(new Response(result.Data[0][0].challenge))
+                    if(result.Data[0][0]["challenge"]) {
+                        resp.Data = result.Data[0][0]["challenge"]
+                    } else {
+                        resp.Message = ResponseMessages.NotFound.toString()
+                        resp.Data = null    
+                    }
+                    res(resp)
                 })
-                .catch(result => result)
+                .catch(result => {
+                    resp.IsError = true
+                    resp.Message = result
+                    resp.Data = null
+                    res(resp)
+                })
         })
    
     }
