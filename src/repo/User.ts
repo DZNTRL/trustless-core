@@ -1,4 +1,5 @@
 import { Pool } from "mysql2/promise"
+import { injectable } from "inversify"
 import { IUser } from "../interfaces/repo/IUser"
 import { Response } from "../models/Response"
 import { ResponseMessages } from "../enums/ResponseMessages"
@@ -54,6 +55,7 @@ const sqlVerifyChallenge = `
         AND
         challenge = ?
 `
+@injectable()
 export class User implements IUser {
     pool: Pool
     constructor(pool: Pool, username: string | null = null) {
