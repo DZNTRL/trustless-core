@@ -1,4 +1,4 @@
-import { IResponse } from "../../interfaces/IResponse"
+import { IResponse } from "../IResponse"
 
 export interface IUser {
     checkUsernameUnique: (username: string) => Promise<IResponse<boolean>>

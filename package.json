@@ -8,13 +8,13 @@
     "test": "npx tsc --skipLibCheck && mocha ./dist/js/spec/ --timeout 5000"
   },
   "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/unitedbycharity-1/ubc-models.git"
+    "type": "git"
   },
   "author": "josh bowling",
   "license": "ISC",
   "dependencies": {
     "async": "^3.2.1",
+    "bip39": "^3.0.4",
     "config": "^3.3.6",
     "mysql2": "^2.3.0",
     "openpgp": "^5.0.0-5"
