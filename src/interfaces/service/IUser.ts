@@ -5,4 +5,5 @@ export interface IUser {
     createUser: (username: string, publicKey: string ) => Promise<IResponse<number>>
     getPublicKey: (username: string) => Promise<IResponse<string>>
     login: (username: string, challenge: string) => Promise<IResponse<boolean>>
+    requestLogin: (username: string) => Promise<IResponse<string>>
 }
