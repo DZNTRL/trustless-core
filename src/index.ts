@@ -10,6 +10,8 @@ import { ProWebConstants } from "./constants"
 import { Utils } from "./utils"
 import { IUtils } from "./interfaces/utils"
 import { IInjections, defaultInjections as injections } from "./ioc"
+import { createPool } from "./utils/createConnectionPool"
+import { IUser } from "./interfaces/service/IUser"
 
 export interface IProWebCore {
     Repo: IProWebRepo 
@@ -47,6 +49,10 @@ export { ProWebConstants }
 
 export { Enums as ProWebEnums }
 
-export default ProWebCore
-
 export { injections, IInjections }
+
+export { createPool }
+
+export { IUser }
+
+export default ProWebCore
