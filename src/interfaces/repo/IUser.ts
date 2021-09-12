@@ -1,4 +1,5 @@
 import { IResponse } from "../IResponse"
+import { IUser as IUserModel } from "../../interfaces/models/IUser"
 
 export interface IUser {
     checkUsernameUnique: (username: string) => Promise<IResponse<boolean>>
@@ -8,4 +9,5 @@ export interface IUser {
     getChallenge: (username: string) => Promise<IResponse<string>>
     verifyChallenge: (username: string, challenge: string) => Promise<IResponse<boolean>>
     clearChallenge: (username: string) => Promise<IResponse<boolean>>
+    get: (username: string) => Promise<IResponse<IUserModel>>
 }
