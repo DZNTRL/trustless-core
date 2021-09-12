@@ -47,4 +47,7 @@ export class User implements IUser {
     login(username, challenge) {
         return this.repo.verifyChallenge(username, challenge)
     }
+    getChallenge(username) {
+        return this.repo.getChallenge(username)
+    }
 }

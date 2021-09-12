@@ -4,6 +4,8 @@ import { Response } from "../models/Response"
 import { ResponseMessages } from "../enums/ResponseMessages"
 import { QueryParameter } from "../types/"
 import { Utils } from "./Utils"
+import { User as UserModel } from "../models/User"
+import { IUser as IUserModel } from "../interfaces/models/IUser"
 
 const sqlCreateUser = `
     INSERT INTO Accounts
@@ -53,6 +55,17 @@ const sqlVerifyChallenge = `
         username = ?
         AND
         challenge = ?
+`
+const sqlGetUser = `
+    SELECT
+        username,
+        id,
+        publicKey,
+        isAdmin
+    FROM
+        Accounts
+    WHERE
+        username = ?
 `
 export class User implements IUser {
     pool: Pool
@@ -140,8 +153,7 @@ export class User implements IUser {
                     resp.Data = null
                     res(resp)
                 })
-        })
-   
+        })   
     }
     async verifyChallenge(username, challenge) {
         return new Promise<Response<boolean>>((res, rej) => { 
@@ -158,6 +170,28 @@ export class User implements IUser {
                 .catch(result => result)
         })
 
+    }
+    async get(username) {
+        const resp = new Response<IUserModel>()
+        return new Promise<Response<IUserModel>>((res, rej) => { 
+            this.query<any>(sqlGetUser, [username])
+                .then(result => {
+                    if(result.Data[0][0]) {
+                        let user = result.Data[0][0]
+                        resp.Data = new UserModel(user.username, user.publicKey, user.id, user.isAdmmin)
+                    } else {
+                        resp.Message = ResponseMessages.NotFound.toString()
+                        resp.Data = null    
+                    }
+                    res(resp)
+                })
+                .catch(result => {
+                    resp.IsError = true
+                    resp.Message = result
+                    resp.Data = null
+                    res(resp)
+                })
+        })
     }
 
 }
