@@ -43,7 +43,7 @@ export { ProWebService}
 
 export { ProWebRepo }
 
-export { ProWebModels }
+export { ProWebModels, IProWebModels }
 
 export { ProWebConstants }
 
