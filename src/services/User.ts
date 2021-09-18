@@ -44,10 +44,13 @@ export class User implements IUser {
         }
         return resp
     }
-    login(username, challenge) {
+    verifyChallenge(username, challenge) {
         return this.repo.verifyChallenge(username, challenge)
     }
     getChallenge(username) {
         return this.repo.getChallenge(username)
+    }
+    get(username) {
+        return this.repo.get(username)
     }
 }
