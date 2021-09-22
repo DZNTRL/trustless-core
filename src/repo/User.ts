@@ -91,7 +91,7 @@ export class User implements IUser {
                 .then(result => {
                     res(new Response(result.Data[0][0].result === 0))
                 })
-                .catch(result => result)
+                .catch(result => rej(result))
         })
     }
     async createUser(username, publicKey) {
