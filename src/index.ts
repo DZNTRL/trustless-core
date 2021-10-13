@@ -1,17 +1,15 @@
-import { IResponse } from "./interfaces/IResponse"
 import { Response } from "./models/Response"
 import { Enums, IEnums } from "./enums"
 import { ProWebRepo, IProWebRepo } from "./repo/"
 import { IProWebService, ProWebService } from "./services"
 import { IProWebModels, ProWebModels } from "./models"
-import { ProWebTypes } from "./types"
-import { IProWebConstants } from "./interfaces/constants"
+import { ProWebTypes } from "pro-web-common/dist/js/types"
+import { IProWebConstants } from "pro-web-common/dist/js/interfaces/constants"
 import { ProWebConstants } from "./constants"
 import { Utils } from "./utils"
-import { IUtils } from "./interfaces/utils"
+import { IUtils } from "pro-web-common/dist/js/interfaces/utils"
 import { IInjections, defaultInjections as injections } from "./ioc"
 import { createPool } from "./utils/createConnectionPool"
-import { IUser } from "./interfaces/service/IUser"
 
 export interface IProWebCore {
     Repo: IProWebRepo 
@@ -35,8 +33,6 @@ const ProWebCore: IProWebCore = {
 
 export { ProWebTypes }
 
-export { IResponse }
-
 export { IUtils }
 
 export { ProWebService}
@@ -52,7 +48,5 @@ export { Enums as ProWebEnums }
 export { injections, IInjections }
 
 export { createPool }
-
-export { IUser }
 
 export default ProWebCore

@@ -1,5 +1,5 @@
 import { Response } from "../models/Response";
-import { ISQLUtils } from "../interfaces/repo/IUtils";
+import { ISQLUtils } from "pro-web-common/dist/js/interfaces/repo/IUtils";
 
 export const Utils: ISQLUtils = {
     query: function<T>(pool, statement, params) {

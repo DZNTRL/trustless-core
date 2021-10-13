@@ -1,5 +1,5 @@
 import { User as UserRepo } from "./repo/User"
-import { IUser as IUserRepo } from "./interfaces/repo/IUser"
+import { IUser as IUserRepo } from "pro-web-common/dist/js/interfaces/repo/IUser"
 import mysql from "mysql2/promise"
 
 export interface IInjections {

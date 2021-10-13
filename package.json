@@ -17,7 +17,9 @@
     "bip39": "^3.0.4",
     "config": "^3.3.6",
     "mysql2": "^2.3.0",
-    "openpgp": "^5.0.0-5"
+    "openpgp": "^5.0.0-5",
+    "yup": "^0.32.9",
+    "pro-web-common": "./pro-web-common"
   },
   "devDependencies": {
     "@types/mysql": "^2.15.19",

@@ -1,11 +1,11 @@
 import { Pool } from "mysql2/promise"
-import { IUser } from "../interfaces/repo/IUser"
+import { IUser } from "pro-web-common/dist/js/interfaces/repo/IUser"
 import { Response } from "../models/Response"
 import { ResponseMessages } from "../enums/ResponseMessages"
-import { QueryParameter } from "../types/"
+import { QueryParameter } from "pro-web-common/dist/js/types/"
 import { Utils } from "./Utils"
 import { User as UserModel } from "../models/User"
-import { IUser as IUserModel } from "../interfaces/models/IUser"
+import { IUser as IUserModel } from "pro-web-common/dist/js/interfaces/models/IUser"
 
 const sqlCreateUser = `
     INSERT INTO Accounts

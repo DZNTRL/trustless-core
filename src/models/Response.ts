@@ -1,4 +1,4 @@
-import { IResponse } from "../interfaces/IResponse"
+import { IResponse } from "pro-web-common/dist/js/interfaces/IResponse"
 import { ResponseMessages } from "../enums/ResponseMessages"
 
 export class Response<T> implements IResponse<T> {    

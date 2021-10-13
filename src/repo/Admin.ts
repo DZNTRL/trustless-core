@@ -1,5 +1,4 @@
 import { Pool } from "mysql"
-import mysql from "mysql2"
 import { IAdmin } from "./IAdmin"
 const sqlCreateUser = `
     INSERT INTO Accounts
