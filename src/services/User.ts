@@ -1,5 +1,5 @@
-import { IUser } from "../interfaces/service/IUser"
-import { IUser as IUserRepo } from "../interfaces/repo/IUser"
+import { IUser } from "pro-web-common/dist/js/interfaces/service/IUser"
+import { IUser as IUserRepo } from "pro-web-common/dist/js/interfaces/repo/IUser"
 import mysql from "mysql2/promise"
 import { Response } from "../models/Response"
 import { createChallenge } from "../utils/challenger"
@@ -21,7 +21,7 @@ export class User implements IUser {
         return this.repo.getPublicKey(username)
     }
     async requestLogin(username) {
-        const resp = new Response<string>();
+        const resp = new Response<string>()
         const getResp = await this.repo.getChallenge(username)
         if(getResp.Data === null) {
             var userResp = await this.repo.checkUsernameUnique(username)
@@ -44,7 +44,7 @@ export class User implements IUser {
         }
         return resp
     }
-    verifyChallenge(username, challenge) {
+    login(username, challenge) {
         return this.repo.verifyChallenge(username, challenge)
     }
     getChallenge(username) {

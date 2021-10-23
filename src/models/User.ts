@@ -1,4 +1,4 @@
-import { IUser } from "../interfaces/models/IUser"
+import { IUser } from "pro-web-common/dist/js/interfaces/models/IUser"
 
 export class User implements IUser {
     username: string | null = null
