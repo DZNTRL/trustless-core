@@ -1,11 +1,11 @@
 import { IUser } from "pro-web-common/dist/js/interfaces/service/IUser"
 import { IUser as IUserRepo } from "pro-web-common/dist/js/interfaces/repo/IUser"
 import mysql from "mysql2/promise"
-import { Response } from "../models/Response"
+import { Response } from "pro-web-common/dist/js/Response"
 import { createChallenge } from "../utils/challenger"
 
 import { defaultInjections as ioc } from "../ioc"
-import { ResponseMessages } from "../enums/ResponseMessages"
+import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
 export class User implements IUser {
     repo: IUserRepo
     constructor(pool: mysql.Pool) {

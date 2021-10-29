@@ -1,5 +1,3 @@
-import { Response } from "./models/Response"
-import { Enums, IEnums } from "./enums"
 import { ProWebRepo, IProWebRepo } from "./repo/"
 import { IProWebService, ProWebService } from "./services"
 import { IProWebModels, ProWebModels } from "./models"
@@ -13,9 +11,7 @@ import { createPool } from "./utils/createConnectionPool"
 
 export interface IProWebCore {
     Repo: IProWebRepo 
-    Response: typeof Response
     Service: IProWebService
-    Enums: IEnums
     Models: IProWebModels
     Constants: IProWebConstants
     Utils: IUtils
@@ -24,8 +20,6 @@ export interface IProWebCore {
 const ProWebCore: IProWebCore = {
     Repo: ProWebRepo,
     Service: ProWebService,
-    Response,
-    Enums,
     Models: ProWebModels,
     Constants: ProWebConstants,
     Utils
@@ -42,8 +36,6 @@ export { ProWebRepo }
 export { ProWebModels, IProWebModels }
 
 export { ProWebConstants }
-
-export { Enums as ProWebEnums }
 
 export { injections, IInjections }
 
