@@ -1,16 +1,17 @@
 {
   "name": "pro-web-core",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "",
   "main": "dist/js/index.js",
   "scripts": {
-    "build": "npx tsc --skipLibCheck && node ./changeUpdate",
-    "test": "npx tsc --skipLibCheck && mocha ./dist/js/spec/ --timeout 5000"
+    "build": "rm -rf ./dist/js/ && npx tsc --skipLibCheck && node ./changeUpdate",
+    "test": "npx tsc --skipLibCheck && mocha ./dist/js/spec/ --timeout 5000",
+    "publisha": "npm publish --registry http://localhost:4873 --force"
   },
   "repository": {
     "type": "git"
   },
-  "author": "josh bowling",
+  "author": "josh bowling: Session Messenger<0589f966e710b940904b19fea0ccd3cd1342086f15d69aa7adac8ce6d9abcf7b7a>",
   "license": "ISC",
   "dependencies": {
     "async": "^3.2.1",

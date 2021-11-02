@@ -80,13 +80,17 @@ export class User implements IUser {
         return new Promise<Response<boolean>>((res, rej) => { 
             this.query<boolean>(sqlCreateChallenge, [challenge, username])
                 .then(result => {
+                    console.log(">>",result)
                     const resp = new Response(result.Data[0].changedRows === 1)
                     if(resp.Data) return res(resp)
                     resp.Message = ResponseMessages.NoRecordsUpdated.toString()
                     resp.IsError = true
                     return res(resp)
                 })
-                .catch(result =>  result)
+                .catch(result =>  { 
+                    console.log(result)
+                    rej(result)
+                })
         })
     }
     async clearChallenge(username) {
