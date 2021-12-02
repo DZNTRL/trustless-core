@@ -1,4 +1,4 @@
-import { Response } from "../models/Response";
+import { Response } from "pro-web-common/dist/js/Response";
 import { ISQLUtils } from "pro-web-common/dist/js/interfaces/repo/IUtils";
 
 export const Utils: ISQLUtils = {

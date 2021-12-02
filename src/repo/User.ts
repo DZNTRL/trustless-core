@@ -1,7 +1,7 @@
 import { Pool } from "mysql2/promise"
 import { IUser } from "pro-web-common/dist/js/interfaces/repo/IUser"
-import { Response } from "../models/Response"
-import { ResponseMessages } from "../enums/ResponseMessages"
+import { Response } from "pro-web-common/dist/js/Response"
+import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
 import { QueryParameter } from "pro-web-common/dist/js/types/"
 import { Utils } from "./Utils"
 import { User as UserModel } from "../models/User"
@@ -80,13 +80,17 @@ export class User implements IUser {
         return new Promise<Response<boolean>>((res, rej) => { 
             this.query<boolean>(sqlCreateChallenge, [challenge, username])
                 .then(result => {
+                    console.log(">>",result)
                     const resp = new Response(result.Data[0].changedRows === 1)
                     if(resp.Data) return res(resp)
                     resp.Message = ResponseMessages.NoRecordsUpdated.toString()
                     resp.IsError = true
                     return res(resp)
                 })
-                .catch(result =>  result)
+                .catch(result =>  { 
+                    console.log(result)
+                    rej(result)
+                })
         })
     }
     async clearChallenge(username) {

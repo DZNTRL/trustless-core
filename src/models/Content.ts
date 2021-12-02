@@ -1,4 +1,4 @@
-import { MarkupTypes } from "../enums/MarkupTypes"
+import { MarkupTypes } from "pro-web-common/dist/js/enums/MarkupTypes"
 
 export class Content {
     id: number = 0

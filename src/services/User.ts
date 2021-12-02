@@ -1,15 +1,15 @@
 import { IUser } from "pro-web-common/dist/js/interfaces/service/IUser"
 import { IUser as IUserRepo } from "pro-web-common/dist/js/interfaces/repo/IUser"
 import mysql from "mysql2/promise"
-import { Response } from "../models/Response"
+import { Response } from "pro-web-common/dist/js/Response"
 import { createChallenge } from "../utils/challenger"
+import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
+import { encryptChallenge } from "../utils/encryptChallenge"
 
-import { defaultInjections as ioc } from "../ioc"
-import { ResponseMessages } from "../enums/ResponseMessages"
 export class User implements IUser {
     repo: IUserRepo
-    constructor(pool: mysql.Pool) {
-        this.repo = ioc().UserRepo(pool)
+    constructor(pool: mysql.Pool, repo: IUserRepo, log: () => void) {
+        this.repo = repo
     }
     checkUsernameUnique(username) {
         return this.repo.checkUsernameUnique(username)
@@ -23,8 +23,10 @@ export class User implements IUser {
     async requestLogin(username) {
         const resp = new Response<string>()
         const getResp = await this.repo.getChallenge(username)
+        console.log("output from getChallenge", getResp)
         if(getResp.Data === null) {
-            var userResp = await this.repo.checkUsernameUnique(username)
+            let userResp = await this.repo.checkUsernameUnique(username)
+            console.log(`requestLogin: isUserUnique ${username}`, userResp)
             // if the username is unique, then return without creating challenge
             if(userResp.Data) {
                 resp.Message = ResponseMessages.NotFound.toString()
@@ -32,7 +34,9 @@ export class User implements IUser {
                 return resp                
             }
             let challenge = createChallenge()
-            let createResp = await this.repo.createChallenge(challenge, username)
+            console.log("this is the challenfrom from createChallenge()", challenge)
+            let createResp = await this.repo.createChallenge(username, challenge)
+            console.log("this is the challenge from repo.createChallenge", createResp)
             if(!createResp.Data) {
                 resp.IsError = true
                 resp.Message = createResp.Message
@@ -42,6 +46,13 @@ export class User implements IUser {
         } else {
             resp.Data = getResp.Data
         }
+        const userResp = await this.get(username)
+        console.log("/services.user.requestLogin.userResp", userResp)
+        if(userResp.IsError) {
+            resp.Message = userResp.Message
+            return resp
+        }
+        resp.Data = await encryptChallenge(resp.Data, userResp.Data.publicKey)
         return resp
     }
     login(username, challenge) {
