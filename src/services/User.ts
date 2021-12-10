@@ -8,7 +8,7 @@ import { encryptChallenge } from "../utils/encryptChallenge"
 
 export class User implements IUser {
     repo: IUserRepo
-    constructor(pool: mysql.Pool, repo: IUserRepo, log: () => void) {
+    constructor(repo: IUserRepo) {
         this.repo = repo
     }
     checkUsernameUnique(username) {

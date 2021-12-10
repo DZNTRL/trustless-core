@@ -1,4 +1,4 @@
-import { ProWebRepo, IProWebRepo } from "./repo/"
+import { ProWebRepo, IProWebRepo } from "./repos/"
 import { IProWebService, ProWebService } from "./services"
 import { IProWebModels, ProWebModels } from "./models"
 import { ProWebTypes } from "pro-web-common/dist/js/types"

@@ -1,13 +1,13 @@
-import { User as UserRepo } from "./repo/User"
+import { User as UserRepo } from "./repos/User"
 import { IUser as IUserRepo } from "pro-web-common/dist/js/interfaces/repo/IUser"
-import mysql from "mysql2/promise"
+import { RepoArgs } from "./RepoArgs"
 
 export interface IInjections {
-    UserRepo: (pool: mysql.Pool) => IUserRepo
+    UserRepo: IUserRepo
 }
 
-export const defaultInjections: () => IInjections = () => {
+export const defaultInjections: (repoArgs: RepoArgs) => IInjections = ({pool}) => {
     return {
-        UserRepo: pool => new UserRepo(pool)
+        UserRepo: new UserRepo({pool})
     }
 }
