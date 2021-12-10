@@ -1,6 +1,6 @@
 {
   "name": "pro-web-core",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "dist/js/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "config": "^3.3.6",
     "mysql2": "^2.3.0",
     "openpgp": "^5.0.0-5",
-    "pro-web-common": "^1.0.6",
+    "pro-web-common": "^1.0.9",
     "yup": "^0.32.9"
   },
   "devDependencies": {
