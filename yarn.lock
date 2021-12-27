@@ -689,10 +689,10 @@ picomatch@^2.0.4, picomatch@^2.2.1:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
   integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
 
-pro-web-common@1.0.4:
-  version "1.0.4"
-  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.4.tgz#2e58988b20c9cd5317756b13d6107e53eb71a1f8"
-  integrity sha512-8lwqdh9aazUNn6WZf+UlDK394GwK7tL4AIOeva6d6Z1QlOxY8KSVw8WRpCHHGUnauDp3//1rSyNtyIDHTEeagA==
+pro-web-common@^1.0.9:
+  version "1.0.9"
+  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.9.tgz#289eb2e98447ea5b3f4081f5c2a109d296cd4a71"
+  integrity sha512-FBTqzgVFYGCyDlz2wMazYcRSD1in3qRza4UwVw3ak0Kkz+LwUdpzRt9aG4CRZqyeDxmZ/3zYT4asNVT14g0PUQ==
   dependencies:
     mysql2 "^2.3.2"
     yup "^0.32.11"
@@ -861,6 +861,14 @@ util-deprecate@^1.0.1:
   version "1.0.2"
   resolved "http://localhost:4873/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+
+vybe-common@^1.0.60:
+  version "1.0.60"
+  resolved "http://localhost:4873/vybe-common/-/vybe-common-1.0.60.tgz#741ca8c34bf1c2ac952293c2555f30524b21b8e0"
+  integrity sha512-80zVCLSjwAZzfFHtpML2faWjvtYm98Zw6wAo80K26U/dPUs46SRxMFih5h3bW1zLip1QYrVta7GIdGwkD3F1zA==
+  dependencies:
+    mysql2 "^2.3.2"
+    yup "^0.32.11"
 
 which@2.0.2:
   version "2.0.2"
