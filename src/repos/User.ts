@@ -68,6 +68,25 @@ const sqlGetUser = `
     WHERE
         username = ?
 `
+
+const sqlLogin = `
+    UPDATE
+        Accounts
+    SET
+        lastLogin = UTC_DATE()
+    WHERE
+        username = ?
+`
+
+const sqlLogout = `
+    UPDATE
+        Accounts
+    SET
+        lastLogout = UTC_DATE()
+    WHERE
+        username = ?
+`
+
 export class User implements IUser {
     pool: Pool
     constructor({pool}: RepoArgs) {
@@ -88,7 +107,6 @@ export class User implements IUser {
                     return res(resp)
                 })
                 .catch(result =>  { 
-                    console.log(result)
                     rej(result)
                 })
         })
@@ -140,8 +158,9 @@ export class User implements IUser {
     }
     async getChallenge(username) {
         const resp = new Response<string>()
-        return new Promise<Response<string>>((res, rej) => { 
-            this.query<any>(sqlGetChallenge, [username])
+        return new Promise<Response<string>>((res, rej) => {
+            const query = this.query<any>(sqlGetChallenge, [username])
+            query
                 .then(result => {
                     if(result.Data[0][0]["challenge"]) {
                         resp.Data = result.Data[0][0]["challenge"]
@@ -182,7 +201,7 @@ export class User implements IUser {
                 .then(result => {
                     if(result.Data[0][0]) {
                         let user = result.Data[0][0]
-                        resp.Data = new UserModel(user.username, user.publicKey, user.id, user.isAdmmin)
+                        resp.Data = new UserModel(user.username, user.publicKey, user.id, user.isAdmmin, user.lastLogin, user.lastLogout)
                     } else {
                         resp.Message = ResponseMessages.NotFound.toString()
                         resp.Data = null    
@@ -194,6 +213,31 @@ export class User implements IUser {
                     resp.Message = result
                     resp.Data = null
                     res(resp)
+                })
+        })
+    }
+    async setLogin(username) {
+        return new Promise<Response<boolean>>((res, rej) => { 
+            this.query<boolean>(sqlLogin, [username])
+                .then(result => {
+                    const resp = new Response(result.Data[0].affectedRows === 1)
+                    res(resp)
+                })
+                .catch(result => res(result))
+        })
+    }
+    async setLogout(username) {
+        return new Promise<Response<boolean>>((res, rej) => { 
+            this.query<boolean>(sqlLogout, [username])
+                .then(result => {
+                    const resp = new Response(result.Data[0].affectedRows === 1)
+                    if(!resp.Data) {
+                        resp.Message = ResponseMessages.NotFound.toString()
+                    }
+                    res(resp)
+                })
+                .catch(result => { 
+                    res(result)
                 })
         })
     }
