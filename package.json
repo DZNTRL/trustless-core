@@ -1,6 +1,6 @@
 {
   "name": "pro-web-core",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "",
   "main": "dist/js/index.js",
   "scripts": {
@@ -19,8 +19,7 @@
     "config": "^3.3.6",
     "mysql2": "^2.3.0",
     "openpgp": "^5.0.0-5",
-    "pro-web-common": "^1.0.9",
-    "vybe-common": "^1.0.60",
+    "pro-web-common": "^1.0.22",
     "yup": "^0.32.9"
   },
   "devDependencies": {
