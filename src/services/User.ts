@@ -1,9 +1,13 @@
 import { IUser } from "pro-web-common/dist/js/interfaces/service/IUser"
 import { IUser as IUserRepo } from "pro-web-common/dist/js/interfaces/repo/IUser"
+import { IUser as IModel } from "pro-web-common/dist/js/interfaces/models/IUser"
 import { Response } from "pro-web-common/dist/js/Response"
 import { createChallenge } from "../utils/challenger"
 import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
 import { encryptChallenge } from "../utils/encryptChallenge"
+import { readKey } from "openpgp"
+import { IResponse } from "pro-web-common/dist/js/interfaces/IResponse"
+
 const log = console.log
 export class User implements IUser {
     repo: IUserRepo
@@ -14,7 +18,17 @@ export class User implements IUser {
         return this.repo.checkUsernameUnique(username)
     }
     createUser(username, publicKey) {
-        return this.repo.createUser(username, publicKey)
+        var resp = new Response<number>(0)
+        return new Promise<IResponse<number>>(async (res) => {
+            try {
+                await readKey({ armoredKey: publicKey });
+                res(await this.repo.createUser(username, publicKey))
+            } catch {
+                resp.IsError = true
+                resp.Message = ResponseMessages.InvalidPublicKey.toString()
+                res(resp)
+            }
+        })
     }
     getPublicKey(username) {
         return this.repo.getPublicKey(username)
@@ -53,21 +67,32 @@ export class User implements IUser {
         return resp
     }
     async login(username, challenge) {
-        const resp = new Response<boolean>()
+        const resp = new Response<IModel>()
         const verified = await this.repo.verifyChallenge(username, challenge)
-        console.log("verified in core service/user.login", verified)
         if(verified.IsError) {
-            return verified
+            resp.Message = verified.Message
+            resp.IsError = true
+            return resp
         }
         if(!verified.Data) {
-            return verified
+            resp.Message = ResponseMessages.DataError.toString()
+            return resp
         }
         const loggedIn = await this.repo.setLogin(username)
         if(loggedIn.IsError) {
             console.log("Error updating last login:", loggedIn)
+            resp.IsError = true
+            resp.Message = loggedIn.Message
+            return resp
         }
         console.log("logged in core service/user.login", loggedIn)
-        return loggedIn
+        const userResp = await this.repo.get(username)
+        if(userResp.IsError) {
+            console.log(`could not fetch user ${username}`)
+            resp.IsError = true
+            resp.Message = userResp.Message
+        }
+        return userResp
     }
     logout(username) {
         return this.repo.setLogout(username)

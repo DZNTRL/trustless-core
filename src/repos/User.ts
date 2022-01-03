@@ -62,7 +62,9 @@ const sqlGetUser = `
         username,
         id,
         publicKey,
-        isAdmin
+        isAdmin,
+        lastLogin,
+        lastLogout
     FROM
         Accounts
     WHERE
@@ -73,7 +75,7 @@ const sqlLogin = `
     UPDATE
         Accounts
     SET
-        lastLogin = UTC_DATE()
+        lastLogin = UTC_TIMESTAMP()
     WHERE
         username = ?
 `
@@ -82,7 +84,7 @@ const sqlLogout = `
     UPDATE
         Accounts
     SET
-        lastLogout = UTC_DATE()
+        lastLogout = UTC_TIMESTAMP()
     WHERE
         username = ?
 `
@@ -200,7 +202,7 @@ export class User implements IUser {
             this.query<any>(sqlGetUser, [username])
                 .then(result => {
                     if(result.Data[0][0]) {
-                        let user = result.Data[0][0]
+                        let user = result.Data[0][0]                        
                         resp.Data = new UserModel(user.username, user.publicKey, user.id, user.isAdmmin, user.lastLogin, user.lastLogout)
                     } else {
                         resp.Message = ResponseMessages.NotFound.toString()
